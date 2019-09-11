@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <title>Generate PPT using javascript</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+                    <!-- Bundle: Easiest to use, supports all browsers -->
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/dist/pptxgen.bundle.js"></script>
+            
+            <!-- Individual files: Add only what's needed to avoid clobbering loaded libraries -->
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/libs/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/libs/jszip.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/dist/pptxgen.min.js"></script>
+
+            <script src="https://kit.fontawesome.com/49e0387005.js"></script>
+    </head>
+    <script>
+
+        function generatePPT() {
+
+            // To get timestamp
+            var d = new Date();
+            var n = d.getTime();
+
+
+
+            var pptx = new PptxGenJS();
+            // var slide = pptx.addNewSlide();
+            // slide.addText('Hello World!', { x:1.5, y:1.5, fontSize:28, color:'ff0000' });
+
+                        pptx.setLayout('LAYOUT_WIDE');
+
+            pptx.defineSlideMaster({
+            title: 'MASTER_SLIDE',
+            bkgd:  'FFFFFF',
+            objects: [
+               
+                { 'text':  { text:'Status Report', options:{ x:0.0, y:10.30, w:5.5, h:0.75 } } },
+                { 'image': { x:11.3, y:6.40, w:1.16, h:0.50, path:'images/logo.png' } }
+            ]
+            //slideNumber: { x:0.3, y:'90%' }
+            });
+
+            var slide = pptx.addNewSlide('MASTER_SLIDE');
+
+            var slide1 = pptx.addNewSlide('TITLE_SLIDE');
+            slide1.addImage({ path:'charts/report2.png', x:1, y:1.2, w:11.5, h:5.5 });
+
+            // The background color can be overridden on a per-slide basis:
+            var slide2 = pptx.addNewSlide('TITLE_SLIDE', {bkgd:'FFFCCC'});
+            slide2.addImage({ path:'charts/report3.png', x:1, y:1.2, w:11.5, h:5.5 });
+
+
+            var slide3 = pptx.addNewSlide('TITLE_SLIDE');
+            slide3.addImage({ path:'charts/report4.png', x:1, y:1.2, w:11.5, h:5.5 });
+
+
+            var slide4 = pptx.addNewSlide('TITLE_SLIDE', {bkgd:'FFFCCC'});
+            slide4.addImage({ path:'charts/report5.png', x:1, y:1.2, w:11.5, h:5.5 });
+
+            slide.back  = 'F1F1F1';
+
+
+            slide.addText('Pelican Presentation', { x:0.5, y:0.7, fontSize:35, color:'ff0000' });
+
+            slide1.addText('This report is for some text will come here', { x:0.5, y:0.7, fontSize:25 });
+
+            slide2.addText('This report is for some text will come here', { x:0.5, y:0.7, fontSize:25 });
+
+            slide3.addText('This report is for some text will come here', { x:0.5, y:0.7, fontSize:25 });
+
+            slide4.addText('This report is for some text will come here', { x:0.5, y:0.7, fontSize:25 });
+
+
+            pptx.save('Sample-presentation-'+n);
+        }
+        
+    </script>
+    <body>
+
+       <div class="container">
+           <header>
+               <h1>CREATE PRESENTATION</h1>
+           </header>
+           <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6 text-right"><button name="generate" onClick="generatePPT()" class="btn btn-lg btn-info"><i class="fas fa-file-powerpoint"></i> GENERATE PPT</button></div>
+           </div>
+
+           <div class="row">
+                <div class="col-12"><h3>Slides After Insight Search</h3></div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-4"><img src="charts/thumbs/report2.png" class="img-thumbnail rounded" /></div>
+                        <div class="col-8"><h4>This report is for some text will come here....</h4></div>
+                    </div>
+                    <div class="row">
+                            <div class="col-4"><img src="charts/thumbs/report3.png" class="img-thumbnail rounded" /></div>
+                            <div class="col-8"><h4>This report is for some text will come here....</h4></div>
+                    </div>
+                    <div class="row">
+                            <div class="col-4"><img src="charts/thumbs/report4.png" class="img-thumbnail rounded" /></div>
+                            <div class="col-8"><h4>This report is for some text will come here....</h4></div>
+                    </div>
+                    <div class="row">
+                            <div class="col-4"><img src="charts/thumbs/report5.png" class="img-thumbnail rounded" /></div>
+                            <div class="col-8"><h4>This report is for some text will come here....</h4></div>
+                    </div>    
+                     
+                    
+
+                </div>
+           </div>
+
+       </div>
+        
+
+    </body>
+</html>

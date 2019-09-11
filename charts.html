@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Generate PPT using javascript</title>
+
+                    <!-- Bundle: Easiest to use, supports all browsers -->
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/dist/pptxgen.bundle.js"></script>
+            
+            <!-- Individual files: Add only what's needed to avoid clobbering loaded libraries -->
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/libs/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/libs/jszip.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/dist/pptxgen.min.js"></script>
+    </head>
+    <script>
+
+        function generatePPT() {
+
+            // To get timestamp
+            var d = new Date();
+            var n = d.getTime();
+
+
+
+            var pptx = new PptxGenJS();
+
+            // Slide1
+            var slide = pptx.addNewSlide();
+
+            // Chart Type: LINE
+            var dataChartAreaLine = [
+            {
+                name  : 'Actual Sales',
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                values: [1500, 4600, 5156, 3167, 8510, 8009, 6006, 7855, 12102, 12789, 10123, 15121]
+            },
+            {
+                name  : 'Projected Sales',
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                values: [1000, 2600, 3456, 4567, 5010, 6009, 7006, 8855, 9102, 10789, 11123, 12121]
+            }
+            ];
+            slide.addChart( pptx.charts.LINE, dataChartAreaLine, { x:1.0, y:1.0, w:12, h:6 } );
+
+
+            // Slide2
+            var slide2 = pptx.addNewSlide();
+
+            // Chart Type: LINE
+            var dataChartBar = [
+            {
+                name  : 'Actual Sales',
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                values: [1500, 4600, 5156, 3167, 8510, 8009, 6006, 7855, 12102, 12789, 10123, 15121]
+            },
+            {
+                name  : 'Projected Sales',
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                values: [1000, 2600, 3456, 4567, 5010, 6009, 7006, 8855, 9102, 10789, 11123, 12121]
+            }
+            ];
+            slide2.addChart( pptx.charts.BAR, dataChartBar, { x:1.0, y:1.0, w:12, h:6 } );
+
+
+            pptx.save('Sample-presentation-'+n);
+        }
+        
+    </script>
+    <body>
+
+        <button name="generate" onClick="generatePPT()">Generate PPT</button>
+
+    </body>
+</html>
